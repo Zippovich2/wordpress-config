@@ -1,0 +1,35 @@
+{
+    "name": "zippovich2/wordpress-config",
+    "description": "Creating hooks and filters via yaml files.",
+    "type": "library",
+    "require": {
+        "symfony/yaml": "^5.0",
+        "symfony/config": "^5.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roman Skoropadskyi",
+            "email": "zipo.ckorop@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": { "Zippovich2\\Wordpress\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Zippovich2\\Wordpress\\Tests\\": "tests/"
+        }
+    },
+    "version": "1.0.0",
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpunit/phpunit": "^8.5"
+    },
+    "scripts": {
+        "cs-check": "php-cs-fixer fix --allow-risky=yes --diff --ansi --dry-run",
+        "cs-fix": "php-cs-fixer fix --allow-risky=yes --diff --ansi",
+        "tests": "phpunit --colors=always tests/"
+    }
+}

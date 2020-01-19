@@ -88,6 +88,7 @@ final class YamlFiltersLoaderTest extends TestCase
                             ['callback' => 'test', 'priority' => 10, 'args' => 1],
                         ],
                     ],
+                    'class_prefix' => 'App\Filter\\',
                 ],
             ],
         ];

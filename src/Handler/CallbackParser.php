@@ -20,7 +20,7 @@ use Zippovich2\Wordpress\Exception\CallbackException;
  */
 abstract class CallbackParser
 {
-    protected static function parseCallback(string $callback)
+    protected static function parseCallback(string $callback, ?string $prefix = null)
     {
         if (\function_exists($callback)) {
             return $callback;
@@ -43,7 +43,10 @@ abstract class CallbackParser
         }
 
         if (2 === \count($parts) && \is_callable($parts)) {
-            return $parts;
+            $class = null === $prefix ? $parts[0] : $prefix . $parts[0];
+            $method = $parts[1];
+
+            return [$class, $method];
         }
 
         throw new CallbackException($callback);

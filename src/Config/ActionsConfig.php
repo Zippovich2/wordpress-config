@@ -42,6 +42,9 @@ final class ActionsConfig implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->scalarNode('class_prefix')
+                    ->defaultValue('App\Action\\')
+                ->end()
             ->end()
         ;
 

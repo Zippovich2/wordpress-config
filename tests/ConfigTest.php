@@ -72,6 +72,7 @@ final class ConfigTest extends TestCase
                             ['callback' => 'testEnv', 'priority' => 10, 'args' => 1],
                         ],
                     ],
+                    'class_prefix' => 'App\Filter\\',
                 ],
             ],
             [
@@ -82,6 +83,7 @@ final class ConfigTest extends TestCase
                             ['callback' => 'test', 'priority' => 10, 'args' => 1],
                         ],
                     ],
+                    'class_prefix' => 'App\Action\\',
                 ],
             ],
         ];

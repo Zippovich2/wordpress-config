@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Zippovich2\Wordpress\Handler;
 
-class Filters extends CallbackParser implements HandlerInterface
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
+final class Filters extends CallbackParser implements HandlerInterface
 {
     /**
      * {@inheritdoc}
@@ -22,7 +25,7 @@ class Filters extends CallbackParser implements HandlerInterface
     {
         $counter = 0;
 
-        if (null !== $data) {
+        if (null !== $data && isset($data['filters'])) {
             foreach ($data['filters'] as $filter => $callbacks) {
                 foreach ($callbacks as $callback) {
                     self::createFilter($filter, self::parseCallback($callback['callback']), $callback['priority'], $callback['args']);

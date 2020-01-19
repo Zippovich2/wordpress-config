@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Zippovich2\Wordpress\Handler;
 
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
 interface HandlerInterface
 {
     /**

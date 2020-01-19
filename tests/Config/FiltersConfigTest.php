@@ -18,7 +18,10 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 use Zippovich2\Wordpress\Config\FiltersConfig;
 
-class FiltersConfigTest extends TestCase
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
+final class FiltersConfigTest extends TestCase
 {
     use ConfigsProvider;
 

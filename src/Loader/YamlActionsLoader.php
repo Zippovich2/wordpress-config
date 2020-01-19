@@ -13,35 +13,26 @@ declare(strict_types=1);
 
 namespace Zippovich2\Wordpress\Loader;
 
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\Loader\FileLoader;
-use Symfony\Component\Yaml\Yaml;
 use Zippovich2\Wordpress\Config\ActionsConfig;
-use Zippovich2\Wordpress\Exception\ConfigException;
 
-class YamlActionsLoader extends FileLoader
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
+final class YamlActionsLoader extends AbstractYamlLoader
 {
+    /**
+     * {@inheritdoc}
+     */
     public function load($resource, string $type = null)
     {
-        $configValues[] = Yaml::parseFile($resource);
+        $configValues = $this->parse($resource);
 
-        $processor = new Processor();
-        $config = new ActionsConfig();
-
-        if (null === $configValues) {
-            return null;
-        }
-
-        try {
-            $processedValues = $processor->processConfiguration($config, $configValues);
-        } catch (InvalidConfigurationException $e) {
-            throw new ConfigException($e->getMessage());
-        }
-
-        return $processedValues;
+        return $this->process(new ActionsConfig(), $configValues);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supports($resource, string $type = null)
     {
         return \is_string($resource) && 'actions.yaml' === \pathinfo($resource, PATHINFO_BASENAME);

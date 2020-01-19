@@ -19,7 +19,10 @@ use Zippovich2\Wordpress\Handler\Filters;
 
 require_once 'callbacks.php';
 
-class FiltersTest extends TestCase
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
+final class FiltersTest extends TestCase
 {
     /**
      * @dataProvider actionsProvider

@@ -16,7 +16,10 @@ namespace Zippovich2\Wordpress\Config;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-class ActionsConfig implements ConfigurationInterface
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
+final class ActionsConfig implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {

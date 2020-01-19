@@ -18,7 +18,7 @@ namespace Zippovich2\Wordpress\Exception;
  *
  * @author Roman Skoropadskyi <zipo.ckorop@gmail.com>
  */
-final class ConfigException extends \RuntimeException
+class ConfigException extends \RuntimeException
 {
     public function __construct(string $error, int $code = 0, \Throwable $previous = null)
     {

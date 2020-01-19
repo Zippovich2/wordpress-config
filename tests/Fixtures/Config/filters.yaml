@@ -1,0 +1,3 @@
+filters:
+  yaml:
+    - { callback: test }

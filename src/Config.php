@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Zippovich2\Wordpress;
 
+use Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
@@ -22,6 +23,9 @@ use Zippovich2\Wordpress\Handler\Filters;
 use Zippovich2\Wordpress\Loader\YamlActionsLoader;
 use Zippovich2\Wordpress\Loader\YamlFiltersLoader;
 
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
 final class Config
 {
     public const CONFIG_FILES = [
@@ -35,32 +39,36 @@ final class Config
     private $loader;
 
     /**
-     * @var string
+     * @var FileLocator
      */
-    private $configDirectory;
+    private $fileLocator;
 
     /**
-     * @param string $configDirectory path to the config directory
-     *
-     * @throws PathException   when directory does not exists
-     * @throws LoaderException when can't load config file
+     * @throws PathException when directory does not exists
      */
-    public function load(string $configDirectory): void
+    public function __construct(string $configDirectory)
     {
         if (!\is_dir($configDirectory)) {
             throw new PathException($configDirectory);
         }
 
-        $this->configDirectory = $configDirectory;
-
-        $fileLocator = new FileLocator($configDirectory);
+        $this->fileLocator = new FileLocator($configDirectory);
 
         $loaderResolver = new LoaderResolver([
-            new YamlFiltersLoader($fileLocator),
-            new YamlActionsLoader($fileLocator),
+            new YamlFiltersLoader($this->fileLocator),
+            new YamlActionsLoader($this->fileLocator),
         ]);
-        $this->loader = new DelegatingLoader($loaderResolver);
 
+        $this->loader = new DelegatingLoader($loaderResolver);
+    }
+
+    /**
+     * Load and process configs using resolver.
+     *
+     * @throws LoaderException when can't load config file
+     */
+    public function load(): void
+    {
         foreach (self::CONFIG_FILES as $file) {
             Filters::handle($this->processFile($file));
         }
@@ -69,26 +77,22 @@ final class Config
     /**
      * Loading file by name and looking for file in env directory and merge both files in one.
      *
-     * @return array|null
+     * @return array
      */
-    public function processFile(string $filename)
+    public function processFile(string $filename, bool $loadEnvConfig = true)
     {
-        $values = null;
-
-        $filePath = $this->configDirectory . \sprintf('/%s', $filename);
-        $envFilePath = $this->configDirectory . \sprintf('/%s/%s', APP_ENV, $filename);
-
         try {
-            if (\file_exists($filePath)) {
-                $values = $this->loader->load($filePath);
-            }
-
-            if (\file_exists($envFilePath)) {
-                $envValues = $this->loader->load($envFilePath);
-                $values = \array_merge($values, $envValues);
-            }
+            $filePath = $this->fileLocator->locate($filename);
+            $values = $this->loader->load($filePath);
+        } catch (FileLocatorFileNotFoundException $e) {
+            $values = [];
         } catch (\Exception $e) {
             throw new LoaderException($filename, $e->getCode(), $e);
+        }
+
+        if ($loadEnvConfig) {
+            $envValues = $this->processFile(\sprintf('%s/%s', $_ENV['APP_ENV'], $filename), false);
+            $values = \array_merge($values, $envValues);
         }
 
         return $values;

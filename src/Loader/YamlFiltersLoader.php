@@ -13,33 +13,18 @@ declare(strict_types=1);
 
 namespace Zippovich2\Wordpress\Loader;
 
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\Config\Loader\FileLoader;
-use Symfony\Component\Yaml\Yaml;
 use Zippovich2\Wordpress\Config\FiltersConfig;
-use Zippovich2\Wordpress\Exception\ConfigException;
 
-class YamlFiltersLoader extends FileLoader
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
+final class YamlFiltersLoader extends AbstractYamlLoader
 {
     public function load($resource, string $type = null)
     {
-        $configValues[] = Yaml::parseFile($resource);
+        $configValues = $this->parse($resource);
 
-        $processor = new Processor();
-        $config = new FiltersConfig();
-
-        if (null === $configValues) {
-            return null;
-        }
-
-        try {
-            $processedValues = $processor->processConfiguration($config, $configValues);
-        } catch (InvalidConfigurationException $e) {
-            throw new ConfigException($e->getMessage());
-        }
-
-        return $processedValues;
+        return $this->process(new FiltersConfig(), $configValues);
     }
 
     public function supports($resource, string $type = null)

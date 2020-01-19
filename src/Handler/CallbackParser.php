@@ -15,6 +15,9 @@ namespace Zippovich2\Wordpress\Handler;
 
 use Zippovich2\Wordpress\Exception\CallbackException;
 
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
 abstract class CallbackParser
 {
     protected static function parseCallback(string $callback)

@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Zippovich2\Wordpress\Handler;
 
-class Actions extends CallbackParser implements HandlerInterface
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
+final class Actions extends CallbackParser implements HandlerInterface
 {
     /**
      * {@inheritdoc}
@@ -24,7 +27,7 @@ class Actions extends CallbackParser implements HandlerInterface
     {
         $counter = 0;
 
-        if (null !== $data) {
+        if (null !== $data && isset($data['actions'])) {
             foreach ($data['actions'] as $action => $callbacks) {
                 foreach ($callbacks as $callback) {
                     self::createAction($action, self::parseCallback($callback['callback']), $callback['priority'], $callback['args']);

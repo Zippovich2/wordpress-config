@@ -18,7 +18,10 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 use Zippovich2\Wordpress\Config\ActionsConfig;
 
-class ActionsConfigTest extends TestCase
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
+final class ActionsConfigTest extends TestCase
 {
     use ConfigsProvider;
 

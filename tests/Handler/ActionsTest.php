@@ -19,7 +19,10 @@ use Zippovich2\Wordpress\Handler\Actions;
 
 require_once 'callbacks.php';
 
-class ActionsTest extends TestCase
+/**
+ * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
+ */
+final class ActionsTest extends TestCase
 {
     /**
      * @dataProvider actionsProvider

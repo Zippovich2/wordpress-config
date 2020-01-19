@@ -18,7 +18,7 @@ namespace Zippovich2\Wordpress\Exception;
  *
  * @author Roman Skoropadskyi <zipo.ckorop@gmail.com>
  */
-final class CallbackException extends \RuntimeException
+class CallbackException extends \RuntimeException
 {
     public function __construct(string $path, int $code = 0, \Throwable $previous = null)
     {

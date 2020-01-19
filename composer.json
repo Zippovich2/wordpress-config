@@ -1,6 +1,7 @@
 {
     "name": "zippovich2/wordpress-config",
-    "description": "Creating hooks and filters via yaml files.",
+    "description": "This package allow config your filters and actions via yaml config files.",
+    "keywords": ["wordpress", "config", "filters", "hooks", "actions"],
     "type": "library",
     "require": {
         "php": "^7.2.5",
@@ -23,7 +24,6 @@
             "Zippovich2\\Wordpress\\Tests\\": "tests/"
         }
     },
-    "version": "1.0.0",
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
         "phpunit/phpunit": "^8.5"

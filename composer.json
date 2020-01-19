@@ -3,6 +3,7 @@
     "description": "Creating hooks and filters via yaml files.",
     "type": "library",
     "require": {
+        "php": "^7.2.5",
         "symfony/yaml": "^5.0",
         "symfony/config": "^5.0"
     },

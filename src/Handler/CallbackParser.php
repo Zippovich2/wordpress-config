@@ -43,7 +43,7 @@ abstract class CallbackParser
 
             case \strpos($callback, ':'):
                 $parts = \explode(':', $callback);
-                @\trigger_error('Using non static methods as callback is deprecated and will throw error in further versions.', E_USER_WARNING);
+                @\trigger_error('Using non static methods as callback is deprecated and will throw error in further versions.', E_USER_DEPRECATED);
 
                 break;
 

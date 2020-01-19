@@ -20,8 +20,17 @@ use Zippovich2\Wordpress\Exception\CallbackException;
  */
 abstract class CallbackParser
 {
+    /**
+     * Parse callback and return it if it callable.
+     *
+     * @param string $callback
+     * @param string|null $prefix
+     *
+     * @return array|string
+     */
     protected static function parseCallback(string $callback, ?string $prefix = null)
     {
+        // Check first if callback is function.
         if (\function_exists($callback)) {
             return $callback;
         }

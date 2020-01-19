@@ -71,6 +71,34 @@ trait ConfigsProvider
                     'class_prefix' => 'App\Filter\\',
                 ],
             ],
+            [
+                'in' => [
+                    'filters' => [
+                        'the_content' => [
+                            ['callback' => 'test1', 'priority' => 11],
+                            ['callback' => 'test2'],
+                        ],
+                        'the_title' => [
+                            ['callback' => 'test3', 'args' => 2],
+                            ['callback' => 'test3', 'priority' => -20, 'args' => 2],
+                        ],
+                    ],
+                    'class_prefix' => 'App\MyFilterPath\\',
+                ],
+                'out' => [
+                    'filters' => [
+                        'the_content' => [
+                            ['callback' => 'test1', 'priority' => 11, 'args' => 1],
+                            ['callback' => 'test2', 'priority' => 10, 'args' => 1],
+                        ],
+                        'the_title' => [
+                            ['callback' => 'test3', 'priority' => 10, 'args' => 2],
+                            ['callback' => 'test3', 'priority' => -20, 'args' => 2],
+                        ],
+                    ],
+                    'class_prefix' => 'App\MyFilterPath\\',
+                ],
+            ],
         ];
     }
 
@@ -158,6 +186,34 @@ trait ConfigsProvider
                         ],
                     ],
                     'class_prefix' => 'App\Action\\',
+                ],
+            ],
+            [
+                'in' => [
+                    'actions' => [
+                        'the_content' => [
+                            ['callback' => 'test1', 'priority' => 11],
+                            ['callback' => 'test2'],
+                        ],
+                        'the_title' => [
+                            ['callback' => 'test3', 'args' => 2],
+                            ['callback' => 'test3', 'priority' => -20, 'args' => 2],
+                        ],
+                    ],
+                    'class_prefix' => 'App\MyActionPath\\',
+                ],
+                'out' => [
+                    'actions' => [
+                        'the_content' => [
+                            ['callback' => 'test1', 'priority' => 11, 'args' => 1],
+                            ['callback' => 'test2', 'priority' => 10, 'args' => 1],
+                        ],
+                        'the_title' => [
+                            ['callback' => 'test3', 'priority' => 10, 'args' => 2],
+                            ['callback' => 'test3', 'priority' => -20, 'args' => 2],
+                        ],
+                    ],
+                    'class_prefix' => 'App\MyActionPath\\',
                 ],
             ],
         ];

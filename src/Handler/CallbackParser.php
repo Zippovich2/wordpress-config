@@ -35,6 +35,8 @@ abstract class CallbackParser
             return $callback;
         }
 
+        $delimiter = '::';
+
         switch (true) {
             case \strpos($callback, '::'):
                 $parts = \explode('::', $callback);
@@ -43,6 +45,7 @@ abstract class CallbackParser
 
             case \strpos($callback, ':'):
                 $parts = \explode(':', $callback);
+                $delimiter = ':';
                 @\trigger_error('Using non static methods as callback is deprecated and will throw error in further versions.', E_USER_DEPRECATED);
 
                 break;
@@ -51,11 +54,12 @@ abstract class CallbackParser
                 throw new CallbackException($callback);
         }
 
-        if (2 === \count($parts) && \is_callable($parts)) {
+        if (2 === \count($parts)) {
             $class = null === $prefix ? $parts[0] : $prefix . $parts[0];
             $method = $parts[1];
 
-            return [$class, $method];
+            if( \is_callable($class . $delimiter . $method)) return [$class, $method];
+            if( \is_callable($callback)) return $parts;
         }
 
         throw new CallbackException($callback);

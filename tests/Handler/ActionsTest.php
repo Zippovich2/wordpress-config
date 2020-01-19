@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Zippovich2\Wordpress\Exception\CallbackException;
 use Zippovich2\Wordpress\Handler\Actions;
 
-require_once 'callbacks.php';
+require_once __DIR__ . '/../Fixtures/Callback/functions.php';
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
@@ -95,9 +95,23 @@ final class ActionsTest extends TestCase
                         'action_name' => [
                             ['callback' => 'callback_1', 'priority' => 10, 'args' => 1],
                             ['callback' => 'callback_2', 'priority' => 10, 'args' => 1],
-                            ['callback' => 'CallbackClass:callbackMethod', 'priority' => 10, 'args' => 1],
+                            ['callback' => 'CallbackClass::method', 'priority' => 10, 'args' => 1],
                         ],
                     ],
+                    'class_prefix' => 'Zippovich2\Wordpress\Tests\Fixtures\Callback\\',
+                ],
+                3,
+            ],
+            [
+                [
+                    'actions' => [
+                        'action_name' => [
+                            ['callback' => 'callback_1', 'priority' => 10, 'args' => 1],
+                            ['callback' => 'callback_2', 'priority' => 10, 'args' => 1],
+                            ['callback' => 'Zippovich2\Wordpress\Tests\Fixtures\Callback\CallbackClass::method', 'priority' => 10, 'args' => 1],
+                        ],
+                    ],
+                    'class_prefix' => 'App\Action\\',
                 ],
                 3,
             ],

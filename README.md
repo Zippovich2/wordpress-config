@@ -14,7 +14,7 @@ This package allow config your filters and actions via yaml config files.
 $ composer require zippovich2/wordpress-config
 ```
 
-Then load configs in your `functions.php` or right after `wp-settings.php` file is required:
+Then load configs in your `functions.php` or right after the `wp-settings.php` file was included:
 
 ```php
 $config = new Config('path/to/config-dir');

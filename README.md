@@ -20,3 +20,30 @@ Then load configs in your `functions.php` or right after `wp-settings.php` file 
 $config = new Config('path/to/config-dir');
 $config->load();
 ```
+
+### Usage
+
+#### Filters
+
+```yaml
+# config/filters.yaml
+
+filters:
+  filter_name:
+    - { callback: filter_callback_function, priority: 100, args: 1 }
+  the_content:
+    - { callback: Class:method }
+    - { callback: Class:someFilter, priority: 11 }
+```
+
+#### Actions
+
+```yaml
+# config/actions.yaml
+
+actions:
+  action_name:
+    - { callback: action_callback_function, priority: 100, args: 1 }
+  after_setup_theme:
+    - { callback: ThemeSettings:defaultOptions }
+```

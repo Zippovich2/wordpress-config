@@ -41,7 +41,7 @@ trait ConfigsProvider
                             ['callback' => 'test3', 'priority' => -20, 'args' => 2],
                         ],
                     ],
-                    'class_prefix' => 'App\Filter\\',
+                    'callback_prefix' => 'App\Filter\\',
                 ],
             ],
             [
@@ -68,7 +68,7 @@ trait ConfigsProvider
                             ['callback' => 'test3', 'priority' => -20, 'args' => 2],
                         ],
                     ],
-                    'class_prefix' => 'App\Filter\\',
+                    'callback_prefix' => 'App\Filter\\',
                 ],
             ],
             [
@@ -83,7 +83,7 @@ trait ConfigsProvider
                             ['callback' => 'test3', 'priority' => -20, 'args' => 2],
                         ],
                     ],
-                    'class_prefix' => 'App\MyFilterPath\\',
+                    'callback_prefix' => 'App\MyFilterPath\\',
                 ],
                 'out' => [
                     'filters' => [
@@ -96,7 +96,7 @@ trait ConfigsProvider
                             ['callback' => 'test3', 'priority' => -20, 'args' => 2],
                         ],
                     ],
-                    'class_prefix' => 'App\MyFilterPath\\',
+                    'callback_prefix' => 'App\MyFilterPath\\',
                 ],
             ],
         ];
@@ -158,7 +158,7 @@ trait ConfigsProvider
                             ['callback' => 'test3', 'priority' => -20, 'args' => 2],
                         ],
                     ],
-                    'class_prefix' => 'App\Action\\',
+                    'callback_prefix' => 'App\Action\\',
                 ],
             ],
             [
@@ -185,7 +185,7 @@ trait ConfigsProvider
                             ['callback' => 'test3', 'priority' => -20, 'args' => 2],
                         ],
                     ],
-                    'class_prefix' => 'App\Action\\',
+                    'callback_prefix' => 'App\Action\\',
                 ],
             ],
             [
@@ -200,7 +200,7 @@ trait ConfigsProvider
                             ['callback' => 'test3', 'priority' => -20, 'args' => 2],
                         ],
                     ],
-                    'class_prefix' => 'App\MyActionPath\\',
+                    'callback_prefix' => 'App\MyActionPath\\',
                 ],
                 'out' => [
                     'actions' => [
@@ -213,7 +213,7 @@ trait ConfigsProvider
                             ['callback' => 'test3', 'priority' => -20, 'args' => 2],
                         ],
                     ],
-                    'class_prefix' => 'App\MyActionPath\\',
+                    'callback_prefix' => 'App\MyActionPath\\',
                 ],
             ],
         ];

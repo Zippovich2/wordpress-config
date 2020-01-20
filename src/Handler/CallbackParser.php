@@ -23,9 +23,6 @@ abstract class CallbackParser
     /**
      * Parse callback and return it if it callable.
      *
-     * @param string $callback
-     * @param string|null $prefix
-     *
      * @return array|string
      */
     protected static function parseCallback(string $callback, ?string $prefix = null)
@@ -58,8 +55,13 @@ abstract class CallbackParser
             $class = null === $prefix ? $parts[0] : $prefix . $parts[0];
             $method = $parts[1];
 
-            if( \is_callable($class . $delimiter . $method)) return [$class, $method];
-            if( \is_callable($callback)) return $parts;
+            if (\is_callable($class . $delimiter . $method)) {
+                return [$class, $method];
+            }
+
+            if (\is_callable($callback)) {
+                return $parts;
+            }
         }
 
         throw new CallbackException($callback);

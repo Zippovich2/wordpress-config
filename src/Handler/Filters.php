@@ -24,7 +24,7 @@ final class Filters extends CallbackParser implements HandlerInterface
     public static function handle($data = null): int
     {
         $counter = 0;
-        $classPrefix = isset($data['callback_prefix']) ? $data['callback_prefix'] : null;
+        $classPrefix = $data['callback_prefix'] ?? null;
 
         if (null !== $data && isset($data['filters'])) {
             foreach ($data['filters'] as $filter => $callbacks) {

@@ -18,7 +18,6 @@ use Zippovich2\Wordpress\Exception\CallbackException;
 use Zippovich2\Wordpress\Handler\Filters;
 
 require_once __DIR__ . '/../Fixtures/Callback/functions.php';
-require_once __DIR__ . '/../Fixtures/Callback/CallbackClass.php';
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

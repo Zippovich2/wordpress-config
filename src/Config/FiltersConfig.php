@@ -42,6 +42,9 @@ final class FiltersConfig implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->scalarNode('callback_prefix')
+                    ->defaultValue('App\Filter\\')
+                ->end()
             ->end()
         ;
 

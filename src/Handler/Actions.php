@@ -26,11 +26,17 @@ final class Actions extends CallbackParser implements HandlerInterface
     public static function handle($data = null): int
     {
         $counter = 0;
+        $classPrefix = $data['callback_prefix'] ?? null;
 
         if (null !== $data && isset($data['actions'])) {
             foreach ($data['actions'] as $action => $callbacks) {
                 foreach ($callbacks as $callback) {
-                    self::createAction($action, self::parseCallback($callback['callback']), $callback['priority'], $callback['args']);
+                    self::createAction(
+                        $action,
+                        self::parseCallback($callback['callback'], $classPrefix),
+                        $callback['priority'],
+                        $callback['args']
+                    );
                     ++$counter;
                 }
             }

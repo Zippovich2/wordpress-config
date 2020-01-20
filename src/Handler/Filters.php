@@ -24,11 +24,17 @@ final class Filters extends CallbackParser implements HandlerInterface
     public static function handle($data = null): int
     {
         $counter = 0;
+        $classPrefix = $data['callback_prefix'] ?? null;
 
         if (null !== $data && isset($data['filters'])) {
             foreach ($data['filters'] as $filter => $callbacks) {
                 foreach ($callbacks as $callback) {
-                    self::createFilter($filter, self::parseCallback($callback['callback']), $callback['priority'], $callback['args']);
+                    self::createFilter(
+                        $filter,
+                        self::parseCallback($callback['callback'], $classPrefix),
+                        $callback['priority'],
+                        $callback['args']
+                    );
                     ++$counter;
                 }
             }

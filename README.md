@@ -45,5 +45,47 @@ actions:
   action_name:
     - { callback: action_callback_function, priority: 100, args: 1 }
   after_setup_theme:
-    - { callback: ThemeSettings:defaultOptions }
+    - { callback: App\Action\ThemeSettings:defaultOptions }
+```
+
+#### Callback prefix
+
+You can set callback prefix to avoid long callbacks:
+
+```yaml
+# config/actions.yaml
+
+actions:
+  action_name:
+    - { callback: action_callback_function, priority: 100, args: 2 }
+  after_setup_theme:
+    - { callback: ThemeSettings:defaultOptions } # App\ActionPath\ThemeSettings:defaultOptions
+
+callback_prefix: App\ActionPath\ # it's work only with classes
+```
+
+### Default values
+
+#### Actions
+
+```yaml
+# config/actions.yaml
+
+actions:
+  action_name:
+    - { callback: ~, priority: 10, args: 1 }
+
+callback_prefix: App\Action\ 
+```
+
+#### Filters
+
+```yaml
+# config/filters.yaml
+
+filters:
+  filter_name:
+    - { callback: ~, priority: 10, args: 1 }
+
+callback_prefix: App\Action\ 
 ```

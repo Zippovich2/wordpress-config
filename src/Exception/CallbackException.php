@@ -20,8 +20,8 @@ namespace Zippovich2\Wordpress\Exception;
  */
 class CallbackException extends \RuntimeException
 {
-    public function __construct(string $path, int $code = 0, \Throwable $previous = null)
+    public function __construct(string $callback, int $code = 0, \Throwable $previous = null)
     {
-        parent::__construct(\sprintf('Callback "%s" does not exists.', $path), $code, $previous);
+        parent::__construct(\sprintf('Callback "%s" does not exists.', $callback), $code, $previous);
     }
 }

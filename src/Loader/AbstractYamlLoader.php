@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress\Loader;
+namespace WordpressWrapper\Config\Loader;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -19,8 +19,8 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\Loader\FileLoader;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
-use Zippovich2\Wordpress\Exception\ConfigException;
-use Zippovich2\Wordpress\Exception\LoaderException;
+use WordpressWrapper\Config\Exception\ConfigException;
+use WordpressWrapper\Config\Exception\LoaderException;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

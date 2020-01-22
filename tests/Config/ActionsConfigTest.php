@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress\Tests\Config;
+namespace WordpressWrapper\Config\Tests\Config;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
-use Zippovich2\Wordpress\Config\ActionsConfig;
+use WordpressWrapper\Config\Config\ActionsConfig;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

@@ -17,11 +17,11 @@
     ],
     "minimum-stability": "stable",
     "autoload": {
-        "psr-4": { "Zippovich2\\Wordpress\\": "src/" }
+        "psr-4": { "WordpressWrapper\\Config\\": "src/" }
     },
     "autoload-dev": {
         "psr-4": {
-            "Zippovich2\\Wordpress\\Tests\\": "tests/"
+            "WordpressWrapper\\Config\\Tests\\": "tests/"
         }
     },
     "require-dev": {

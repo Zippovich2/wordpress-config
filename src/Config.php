@@ -11,17 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress;
+namespace WordpressWrapper\Config;
 
 use Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
-use Zippovich2\Wordpress\Exception\LoaderException;
-use Zippovich2\Wordpress\Exception\PathException;
-use Zippovich2\Wordpress\Handler\Filters;
-use Zippovich2\Wordpress\Loader\YamlActionsLoader;
-use Zippovich2\Wordpress\Loader\YamlFiltersLoader;
+use WordpressWrapper\Config\Exception\LoaderException;
+use WordpressWrapper\Config\Exception\PathException;
+use WordpressWrapper\Config\Handler\Filters;
+use WordpressWrapper\Config\Loader\YamlActionsLoader;
+use WordpressWrapper\Config\Loader\YamlFiltersLoader;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

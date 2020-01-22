@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress\Tests\Handler;
+namespace WordpressWrapper\Config\Tests\Handler;
 
 use PHPUnit\Framework\TestCase;
-use Zippovich2\Wordpress\Exception\CallbackException;
-use Zippovich2\Wordpress\Handler\Filters;
+use WordpressWrapper\Config\Exception\CallbackException;
+use WordpressWrapper\Config\Handler\Filters;
 
 require_once __DIR__ . '/../Fixtures/Callback/functions.php';
 
@@ -98,7 +98,7 @@ final class FiltersTest extends TestCase
                             ['callback' => 'CallbackClass::method', 'priority' => 10, 'args' => 1],
                         ],
                     ],
-                    'callback_prefix' => 'Zippovich2\Wordpress\Tests\Fixtures\Callback\\',
+                    'callback_prefix' => 'WordpressWrapper\Config\Tests\Fixtures\Callback\\',
                 ],
                 3,
             ],
@@ -108,7 +108,7 @@ final class FiltersTest extends TestCase
                         'action_name' => [
                             ['callback' => 'callback_1', 'priority' => 10, 'args' => 1],
                             ['callback' => 'callback_2', 'priority' => 10, 'args' => 1],
-                            ['callback' => 'Zippovich2\Wordpress\Tests\Fixtures\Callback\CallbackClass::method', 'priority' => 10, 'args' => 1],
+                            ['callback' => 'WordpressWrapper\Config\Tests\Fixtures\Callback\CallbackClass::method', 'priority' => 10, 'args' => 1],
                         ],
                     ],
                     'callback_prefix' => 'App\Filter\\',

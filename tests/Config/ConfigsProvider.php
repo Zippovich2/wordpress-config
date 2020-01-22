@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress\Tests\Config;
+namespace WordpressWrapper\Config\Tests\Config;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

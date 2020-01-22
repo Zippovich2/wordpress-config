@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress\Handler;
+namespace WordpressWrapper\Config\Handler;
 
-use Zippovich2\Wordpress\Exception\CallbackException;
+use WordpressWrapper\Config\Exception\CallbackException;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

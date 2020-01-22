@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress\Tests;
+namespace WordpressWrapper\Config\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Zippovich2\Wordpress\Config;
-use Zippovich2\Wordpress\Exception\LoaderException;
-use Zippovich2\Wordpress\Exception\PathException;
+use WordpressWrapper\Config\Config;
+use WordpressWrapper\Config\Exception\LoaderException;
+use WordpressWrapper\Config\Exception\PathException;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

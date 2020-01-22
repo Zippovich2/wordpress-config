@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress\Loader;
+namespace WordpressWrapper\Config\Loader;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Zippovich2\Wordpress\Exception\ConfigException;
+use WordpressWrapper\Config\Exception\ConfigException;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

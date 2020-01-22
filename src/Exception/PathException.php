@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress\Exception;
+namespace WordpressWrapper\Config\Exception;
 
 /**
  * Thrown when a file or directory does not exist.

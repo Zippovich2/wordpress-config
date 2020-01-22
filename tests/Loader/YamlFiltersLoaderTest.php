@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress\Tests\Loader;
+namespace WordpressWrapper\Config\Tests\Loader;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Exception\FileLocatorFileNotFoundException;
 use Symfony\Component\Config\FileLocator;
-use Zippovich2\Wordpress\Exception\LoaderException;
-use Zippovich2\Wordpress\Loader\YamlFiltersLoader;
+use WordpressWrapper\Config\Exception\LoaderException;
+use WordpressWrapper\Config\Loader\YamlFiltersLoader;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

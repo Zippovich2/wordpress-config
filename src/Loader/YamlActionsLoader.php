@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Zippovich2\Wordpress\Loader;
+namespace WordpressWrapper\Config\Loader;
 
-use Zippovich2\Wordpress\Config\ActionsConfig;
+use WordpressWrapper\Config\Config\ActionsConfig;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

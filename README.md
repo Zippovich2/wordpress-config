@@ -1,8 +1,9 @@
 ## Wordpress Wrapper Config
-Allow config filters and actions via yaml config files.
+
+Allows you to configure filters and actions via yaml config files.
 
 [![Build Status](https://travis-ci.org/Zippovich2/wordpress-config.svg?branch=master)](https://travis-ci.org/Zippovich2/wordpress-config)
-[![Packagist](https://img.shields.io/packagist/v/zippovich2/wordpress-config.svg)](https://github.com/Zippovich2/wordpress-config)
+[![Packagist](https://img.shields.io/packagist/v/zippovich2/wordpress-config.svg)](https://packagist.org/packages/zippovich2/wordpress-config)
 
 ### Installation
 
@@ -36,8 +37,8 @@ filters:
   filter_name:
     - { callback: filter_callback_function, priority: 100, args: 1 }
   the_content:
-    - { callback: Class:method }
-    - { callback: Class:someFilter, priority: 11 }
+    - { callback: Class::method }
+    - { callback: Class::someFilter, priority: 1 }
 ```
 
 #### Actions
@@ -49,7 +50,7 @@ actions:
   action_name:
     - { callback: action_callback_function, priority: 100, args: 1 }
   after_setup_theme:
-    - { callback: App\Action\ThemeSettings:defaultOptions }
+    - { callback: App\Action\ThemeSettings::defaultOptions }
 ```
 
 #### Callback prefix
@@ -63,7 +64,7 @@ actions:
   action_name:
     - { callback: action_callback_function, priority: 100, args: 2 }
   after_setup_theme:
-    - { callback: ThemeSettings:defaultOptions } # App\ActionPath\ThemeSettings:defaultOptions
+    - { callback: ThemeSettings::defaultOptions } # App\ActionPath\ThemeSettings:defaultOptions
 
 callback_prefix: App\ActionPath\ # it's work only with classes
 ```
@@ -91,5 +92,5 @@ filters:
   filter_name:
     - { callback: ~, priority: 10, args: 1 }
 
-callback_prefix: App\Action\ 
+callback_prefix: App\Filter\ 
 ```

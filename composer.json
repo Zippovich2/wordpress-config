@@ -1,7 +1,7 @@
 {
     "name": "zippovich2/wordpress-config",
-    "description": "This package allow config your filters and actions via yaml config files.",
-    "keywords": ["wordpress", "config", "filters", "hooks", "actions"],
+    "description": "This package allows you to configure filters and actions via yaml config files.",
+    "keywords": ["wordpress", "config", "filters", "hooks", "actions", "yaml"],
     "type": "library",
     "require": {
         "php": "^7.2.5",

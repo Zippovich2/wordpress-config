@@ -19,6 +19,7 @@ use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
 use WordpressWrapper\Config\Exception\LoaderException;
 use WordpressWrapper\Config\Exception\PathException;
+use WordpressWrapper\Config\Handler\Actions;
 use WordpressWrapper\Config\Handler\Filters;
 use WordpressWrapper\Config\Loader\YamlActionsLoader;
 use WordpressWrapper\Config\Loader\YamlFiltersLoader;
@@ -28,10 +29,8 @@ use WordpressWrapper\Config\Loader\YamlFiltersLoader;
  */
 final class Config
 {
-    public const CONFIG_FILES = [
-        'filters.yaml',
-        'actions.yaml',
-    ];
+    public const FILTERS_CONFIG = 'filters.yaml';
+    public const ACTIONS_CONFIG = 'actions.yaml';
 
     /**
      * @var DelegatingLoader
@@ -69,9 +68,8 @@ final class Config
      */
     public function load(): void
     {
-        foreach (self::CONFIG_FILES as $file) {
-            Filters::handle($this->processFile($file));
-        }
+        Filters::handle($this->processFile(self::FILTERS_CONFIG));
+        Actions::handle($this->processFile(self::ACTIONS_CONFIG));
     }
 
     /**

@@ -29,6 +29,6 @@ final class YamlSettingsLoader extends AbstractYamlLoader
 
     public function supports($resource, string $type = null)
     {
-        return \is_string($resource) && 'config.yaml' === \pathinfo($resource, PATHINFO_BASENAME);
+        return \is_string($resource) && 'settings.yaml' === \pathinfo($resource, PATHINFO_BASENAME);
     }
 }

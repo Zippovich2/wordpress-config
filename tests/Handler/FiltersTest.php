@@ -15,7 +15,7 @@ namespace WordpressWrapper\Config\Tests\Handler;
 
 use PHPUnit\Framework\TestCase;
 use WordpressWrapper\Config\Exception\CallbackException;
-use WordpressWrapper\Config\Handler\Filters;
+use WordpressWrapper\Config\Handler\FiltersHandler;
 
 require_once __DIR__ . '/../Fixtures/Callback/functions.php';
 
@@ -29,7 +29,7 @@ final class FiltersTest extends TestCase
      */
     public function testHandleWithCorrectData($data, $expectedCalls): void
     {
-        static::assertEquals($expectedCalls, Filters::handle($data));
+        static::assertEquals($expectedCalls, FiltersHandler::handle($data));
     }
 
     /**
@@ -38,7 +38,7 @@ final class FiltersTest extends TestCase
     public function testHandleWithUndefinedCallbacks($data): void
     {
         static::expectException(CallbackException::class);
-        Filters::handle($data);
+        FiltersHandler::handle($data);
     }
 
     public function undefinedCallbacksProvider()

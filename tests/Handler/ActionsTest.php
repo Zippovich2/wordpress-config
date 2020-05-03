@@ -15,7 +15,7 @@ namespace WordpressWrapper\Config\Tests\Handler;
 
 use PHPUnit\Framework\TestCase;
 use WordpressWrapper\Config\Exception\CallbackException;
-use WordpressWrapper\Config\Handler\Actions;
+use WordpressWrapper\Config\Handler\ActionsHandler;
 
 require_once __DIR__ . '/../Fixtures/Callback/functions.php';
 
@@ -29,7 +29,7 @@ final class ActionsTest extends TestCase
      */
     public function testHandleWithCorrectData($data, $expectedCalls): void
     {
-        static::assertEquals($expectedCalls, Actions::handle($data));
+        static::assertEquals($expectedCalls, ActionsHandler::handle($data));
     }
 
     /**
@@ -38,7 +38,7 @@ final class ActionsTest extends TestCase
     public function testHandleWithUndefinedCallbacks($data): void
     {
         static::expectException(CallbackException::class);
-        Actions::handle($data);
+        ActionsHandler::handle($data);
     }
 
     public function undefinedCallbacksProvider()

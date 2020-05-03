@@ -19,7 +19,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
  */
-final class Config implements ConfigurationInterface
+final class SettingsConfig implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
@@ -27,7 +27,7 @@ final class Config implements ConfigurationInterface
 
         $treeBuilder->getRootNode()
             ->children()
-                ->arrayNode('config')
+                ->arrayNode('settings')
                     ->children()
                         ->arrayNode('actions')
                             ->scalarPrototype()->end()

@@ -19,11 +19,11 @@ use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\Loader\LoaderResolver;
 use WordpressWrapper\Config\Exception\LoaderException;
 use WordpressWrapper\Config\Exception\PathException;
-use WordpressWrapper\Config\Handler\Actions;
-use WordpressWrapper\Config\Handler\Config as ConfigHandler;
-use WordpressWrapper\Config\Handler\Filters;
+use WordpressWrapper\Config\Handler\ActionsHandler;
+use WordpressWrapper\Config\Handler\SettingsHandler;
+use WordpressWrapper\Config\Handler\FiltersHandler;
 use WordpressWrapper\Config\Loader\YamlActionsLoader;
-use WordpressWrapper\Config\Loader\YamlConfigLoader;
+use WordpressWrapper\Config\Loader\YamlSettingsLoader;
 use WordpressWrapper\Config\Loader\YamlFiltersLoader;
 
 /**
@@ -33,6 +33,7 @@ final class Config
 {
     public const FILTERS_CONFIG = 'filters.yaml';
     public const ACTIONS_CONFIG = 'actions.yaml';
+    public const SETTINGS_CONFIG = 'settings.yaml';
 
     /**
      * @var DelegatingLoader
@@ -58,7 +59,7 @@ final class Config
         $loaderResolver = new LoaderResolver([
             new YamlFiltersLoader($this->fileLocator),
             new YamlActionsLoader($this->fileLocator),
-            new YamlConfigLoader($this->fileLocator),
+            new YamlSettingsLoader($this->fileLocator),
         ]);
 
         $this->loader = new DelegatingLoader($loaderResolver);
@@ -71,7 +72,7 @@ final class Config
      */
     public function load(): void
     {
-        $config = ConfigHandler::handle($this->processFile('config.yaml'));
+        $config = SettingsHandler::handle($this->processFile(self::SETTINGS_CONFIG));
 
         $this->loadActions($config['actions'] ?? null);
         $this->loadFilters($config['filters'] ?? null);
@@ -83,10 +84,10 @@ final class Config
     private function loadActions(?array $actions = null): void
     {
         if (null === $actions) {
-            Actions::handle($this->processFile(self::ACTIONS_CONFIG));
+            ActionsHandler::handle($this->processFile(self::ACTIONS_CONFIG));
         } else {
             foreach ($actions as $configFile) {
-                Actions::handle($this->processFile($configFile, true, false));
+                ActionsHandler::handle($this->processFile($configFile, true, false));
             }
         }
     }
@@ -97,10 +98,10 @@ final class Config
     private function loadFilters(?array $filters = null): void
     {
         if (null === $filters) {
-            Filters::handle($this->processFile(self::FILTERS_CONFIG));
+            FiltersHandler::handle($this->processFile(self::FILTERS_CONFIG));
         } else {
             foreach ($filters as $configFile) {
-                Filters::handle($this->processFile($configFile, true, false));
+                FiltersHandler::handle($this->processFile($configFile, true, false));
             }
         }
     }

@@ -16,13 +16,13 @@ namespace WordpressWrapper\Config\Handler;
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
  */
-final class Config implements HandlerInterface
+final class SettingsHandler implements HandlerInterface
 {
     /**
      * {@inheritdoc}
      */
     public static function handle($data = null)
     {
-        return $data['config'] ?? null;
+        return $data['settings'] ?? null;
     }
 }

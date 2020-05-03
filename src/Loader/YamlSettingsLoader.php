@@ -13,18 +13,18 @@ declare(strict_types=1);
 
 namespace WordpressWrapper\Config\Loader;
 
-use WordpressWrapper\Config\Config\Config;
+use WordpressWrapper\Config\Config\SettingsConfig;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
  */
-final class YamlConfigLoader extends AbstractYamlLoader
+final class YamlSettingsLoader extends AbstractYamlLoader
 {
     public function load($resource, string $type = null)
     {
         $configValues = $this->parse($resource);
 
-        return $this->process(new Config(), $configValues);
+        return $this->process(new SettingsConfig(), $configValues);
     }
 
     public function supports($resource, string $type = null)

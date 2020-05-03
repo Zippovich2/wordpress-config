@@ -29,7 +29,6 @@ final class SettingsHandlerTest extends TestCase
         static::assertEquals($expectedData, SettingsHandler::handle($inputData));
     }
 
-
     public function dataProvider()
     {
         return [
@@ -99,7 +98,7 @@ final class SettingsHandlerTest extends TestCase
             ],
             [
                 'input' => [],
-                'expected' => null
+                'expected' => null,
             ],
         ];
     }

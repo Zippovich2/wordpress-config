@@ -1,0 +1,6 @@
+settings:
+  actions:
+    - wrong-path-actions.yaml
+
+  filters:
+    - set-filters.yaml

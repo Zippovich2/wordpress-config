@@ -1,0 +1,3 @@
+filters:
+  the_title:
+    - {callback: callback_1}

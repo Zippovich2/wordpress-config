@@ -11,9 +11,28 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-function callback_1(): void
-{
+if (!\function_exists('callback_1')) {
+    function callback_1(): void
+    {
+    }
 }
-function callback_2(): void
-{
+
+if (!\function_exists('callback_2')) {
+    function callback_2(): void
+    {
+    }
+}
+
+if (!\function_exists('add_action')) {
+    function add_action($action, $callback, $priority, $args)
+    {
+        return [$action, $callback, $priority, $args];
+    }
+}
+
+if (!\function_exists('add_filter')) {
+    function add_filter($action, $callback, $priority, $args)
+    {
+        return [$action, $callback, $priority, $args];
+    }
 }

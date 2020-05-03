@@ -1,0 +1,3 @@
+actions:
+  wp_head:
+    - {callback: callback_2}

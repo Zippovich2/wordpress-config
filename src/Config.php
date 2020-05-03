@@ -20,11 +20,11 @@ use Symfony\Component\Config\Loader\LoaderResolver;
 use WordpressWrapper\Config\Exception\LoaderException;
 use WordpressWrapper\Config\Exception\PathException;
 use WordpressWrapper\Config\Handler\ActionsHandler;
-use WordpressWrapper\Config\Handler\SettingsHandler;
 use WordpressWrapper\Config\Handler\FiltersHandler;
+use WordpressWrapper\Config\Handler\SettingsHandler;
 use WordpressWrapper\Config\Loader\YamlActionsLoader;
-use WordpressWrapper\Config\Loader\YamlSettingsLoader;
 use WordpressWrapper\Config\Loader\YamlFiltersLoader;
+use WordpressWrapper\Config\Loader\YamlSettingsLoader;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>

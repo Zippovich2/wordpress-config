@@ -1,0 +1,6 @@
+settings:
+  actions:
+    - set-actions.yaml
+
+  filters:
+    - set-filters.yaml

@@ -16,23 +16,21 @@ namespace WordpressWrapper\Config\Handler;
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
  */
-final class Actions extends CallbackParser implements HandlerInterface
+final class FiltersHandler extends CallbackParser implements HandlerInterface
 {
     /**
      * {@inheritdoc}
-     *
-     * @return int number of added actions
      */
     public static function handle($data = null): int
     {
         $counter = 0;
         $classPrefix = $data['callback_prefix'] ?? null;
 
-        if (null !== $data && isset($data['actions'])) {
-            foreach ($data['actions'] as $action => $callbacks) {
+        if (null !== $data && isset($data['filters'])) {
+            foreach ($data['filters'] as $filter => $callbacks) {
                 foreach ($callbacks as $callback) {
-                    self::createAction(
-                        $action,
+                    self::createFilter(
+                        $filter,
                         self::parseCallback($callback['callback'], $classPrefix),
                         $callback['priority'],
                         $callback['args']
@@ -45,10 +43,10 @@ final class Actions extends CallbackParser implements HandlerInterface
         return $counter;
     }
 
-    protected static function createAction(string $action, $callback, int $priority, int $args): void
+    protected static function createFilter(string $filter, $callback, int $priority, int $args): void
     {
-        if (\function_exists('add_action')) {
-            add_action($action, $callback, $priority, $args);
+        if (\function_exists('add_filter')) {
+            add_filter($filter, $callback, $priority, $args);
         }
     }
 }

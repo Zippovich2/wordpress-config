@@ -18,6 +18,111 @@ namespace WordpressWrapper\Config\Tests\Config;
  */
 trait ConfigsProvider
 {
+    public function correctSettingsConfigs()
+    {
+        return [
+            [
+                'in' => [
+                    'settings' => [
+                        'actions' => [
+                            'set-1-actions.yaml',
+                            'set-2-actions.yaml',
+                            'set-3-actions.yaml',
+                        ],
+                    ],
+                ],
+                'out' => [
+                    'settings' => [
+                        'actions' => [
+                            'set-1-actions.yaml',
+                            'set-2-actions.yaml',
+                            'set-3-actions.yaml',
+                        ],
+                        'filters' => [],
+                    ],
+                ],
+            ],
+            [
+                'in' => [
+                    'settings' => [
+                        'filters' => [
+                            'set-1-filters.yaml',
+                            'set-2-filters.yaml',
+                            'set-3-filters.yaml',
+                        ],
+                    ],
+                ],
+                'out' => [
+                    'settings' => [
+                        'filters' => [
+                            'set-1-filters.yaml',
+                            'set-2-filters.yaml',
+                            'set-3-filters.yaml',
+                        ],
+                        'actions' => [],
+                    ],
+                ],
+            ],
+            [
+                'in' => [
+                    'settings' => [
+                        'actions' => [
+                            'set-1-actions.yaml',
+                            'set-2-actions.yaml',
+                            'set-3-actions.yaml',
+                        ],
+                        'filters' => [
+                            'set-1-filters.yaml',
+                            'set-2-filters.yaml',
+                            'set-3-filters.yaml',
+                        ],
+                    ],
+                ],
+                'out' => [
+                    'settings' => [
+                        'actions' => [
+                            'set-1-actions.yaml',
+                            'set-2-actions.yaml',
+                            'set-3-actions.yaml',
+                        ],
+                        'filters' => [
+                            'set-1-filters.yaml',
+                            'set-2-filters.yaml',
+                            'set-3-filters.yaml',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+    }
+
+    public function incorrectSettingsConfigs()
+    {
+        return [
+            [
+                [
+                    'settings' => [
+                        'invalid-key' => [
+                            'set-1-actions.yaml',
+                            'set-2-actions.yaml',
+                            'set-3-actions.yaml',
+                        ],
+                    ],
+                ],
+                [
+                    'settings' => [
+                        'actions' => 'array of actions should be provided',
+                    ],
+                ],
+                [
+                    'settings' => [
+                        'filters' => 'array of filters should be provided',
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function correctFiltersConfigs()
     {
         return [

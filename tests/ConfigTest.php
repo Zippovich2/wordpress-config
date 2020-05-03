@@ -15,8 +15,11 @@ namespace WordpressWrapper\Config\Tests;
 
 use PHPUnit\Framework\TestCase;
 use WordpressWrapper\Config\Config;
+use WordpressWrapper\Config\Exception\CallbackException;
 use WordpressWrapper\Config\Exception\LoaderException;
 use WordpressWrapper\Config\Exception\PathException;
+
+require_once __DIR__ . '/Fixtures/Callback/functions.php';
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
@@ -24,6 +27,7 @@ use WordpressWrapper\Config\Exception\PathException;
 final class ConfigTest extends TestCase
 {
     public const FIXTURES_DIR = __DIR__ . '/Fixtures/Config';
+    public const FIXTURES_LOAD_DIR = __DIR__ . '/Fixtures/ConfigLoad';
 
     private $config;
 
@@ -47,18 +51,71 @@ final class ConfigTest extends TestCase
     /**
      * @dataProvider processFileExceptionProvider
      */
-    public function testProcessFileLoaderExceptions($filename, $exception): void
+    public function testProcessFileLoaderExceptions($filename, $exception, bool $skipNotFoundFiles = true): void
     {
         $this->expectException($exception);
 
-        $this->config->processFile($filename);
+        $this->config->processFile($filename, true, $skipNotFoundFiles);
     }
 
     public function testPathException(): void
     {
         $this->expectException(PathException::class);
 
-        $config = new Config('some/dir');
+        (new Config('some/dir'));
+    }
+
+    /**
+     * @dataProvider successfulLoadProvider
+     */
+    public function testSuccessLoad($dir): void
+    {
+        $config = new Config(\sprintf('%s/%s', self::FIXTURES_LOAD_DIR, $dir));
+        $config->load();
+
+        static::assertTrue(true);
+    }
+
+    /**
+     * @dataProvider successfulLoadProvider
+     */
+    public function testSuccessfulLoad($dir): void
+    {
+        $config = new Config(\sprintf('%s/%s', self::FIXTURES_LOAD_DIR, $dir));
+        $config->load();
+
+        static::assertTrue(true);
+    }
+
+    /**
+     * @dataProvider unsuccessfulLoadProvider
+     */
+    public function testUnsuccessfulLoad($dir, $exception): void
+    {
+        $this->expectException($exception);
+
+        $config = new Config(\sprintf('%s/%s', self::FIXTURES_LOAD_DIR, $dir));
+        $config->load();
+
+        static::assertTrue(true);
+    }
+
+    public function successfulLoadProvider()
+    {
+        return [
+            ['1'], // with settings.yaml
+            ['2'], // without settings.yaml
+            ['empty'], // check empty directory
+        ];
+    }
+
+    public function unsuccessfulLoadProvider()
+    {
+        return [
+            ['3', PathException::class],
+            ['4', CallbackException::class],
+            ['5', LoaderException::class],
+        ];
     }
 
     public function processFileProvider()
@@ -86,6 +143,21 @@ final class ConfigTest extends TestCase
                     'callback_prefix' => 'App\Action\\',
                 ],
             ],
+            [
+                'settings.yaml',
+                [
+                    'settings' => [
+                        'actions' => [
+                            'set-1-actions.yaml',
+                            'set-2-actions.yaml',
+                        ],
+                        'filters' => [
+                            'set-1-filters.yaml',
+                            'set-2-filters.yaml',
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -94,6 +166,7 @@ final class ConfigTest extends TestCase
         return [
             ['invalid.yaml', LoaderException::class],
             ['invalid_with_env.yaml', LoaderException::class],
+            ['invalid-path-to-file.yaml', PathException::class, false],
         ];
     }
 }

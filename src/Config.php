@@ -121,12 +121,12 @@ final class Config
             $values = $this->loader->load($filePath);
         } catch (FileLocatorFileNotFoundException $e) {
             if (false === $skipNotFoundFiles) {
-                throw new PathException(\sprintf('File "%s" not found. Config files included in config.yaml could be exist.', $filename), 0, $e);
+                throw new PathException(\sprintf('File "%s" not found.', $filename), 0, $e);
             }
 
             $values = [];
         } catch (\Throwable $e) {
-            throw new LoaderException($filename, $e->getCode(), $e);
+            throw new LoaderException($filename, 0, $e);
         }
 
         if ($loadEnvConfig) {

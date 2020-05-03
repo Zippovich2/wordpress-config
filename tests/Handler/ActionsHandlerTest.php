@@ -15,21 +15,21 @@ namespace WordpressWrapper\Config\Tests\Handler;
 
 use PHPUnit\Framework\TestCase;
 use WordpressWrapper\Config\Exception\CallbackException;
-use WordpressWrapper\Config\Handler\FiltersHandler;
+use WordpressWrapper\Config\Handler\ActionsHandler;
 
 require_once __DIR__ . '/../Fixtures/Callback/functions.php';
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
  */
-final class FiltersTest extends TestCase
+final class ActionsHandlerTest extends TestCase
 {
     /**
      * @dataProvider actionsProvider
      */
     public function testHandleWithCorrectData($data, $expectedCalls): void
     {
-        static::assertEquals($expectedCalls, FiltersHandler::handle($data));
+        static::assertEquals($expectedCalls, ActionsHandler::handle($data));
     }
 
     /**
@@ -38,7 +38,7 @@ final class FiltersTest extends TestCase
     public function testHandleWithUndefinedCallbacks($data): void
     {
         static::expectException(CallbackException::class);
-        FiltersHandler::handle($data);
+        ActionsHandler::handle($data);
     }
 
     public function undefinedCallbacksProvider()
@@ -46,7 +46,7 @@ final class FiltersTest extends TestCase
         return [
             [
                 [
-                    'filters' => [
+                    'actions' => [
                         'action_name' => [
                             ['callback' => 'undefined_function_callback', 'priority' => 10, 'args' => 1],
                         ],
@@ -55,7 +55,7 @@ final class FiltersTest extends TestCase
             ],
             [
                 [
-                    'filters' => [
+                    'actions' => [
                         'action_name' => [
                             ['callback' => 'UndefinedClass:callback', 'priority' => 10, 'args' => 1],
                         ],
@@ -74,13 +74,13 @@ final class FiltersTest extends TestCase
             ],
             [
                 [
-                    'filters' => [],
+                    'actions' => [],
                 ],
                 0,
             ],
             [
                 [
-                    'filters' => [
+                    'actions' => [
                         'action_name' => [
                             ['callback' => 'callback_1', 'priority' => 10, 'args' => 1],
                             ['callback' => 'callback_2', 'priority' => 10, 'args' => 1],
@@ -91,7 +91,7 @@ final class FiltersTest extends TestCase
             ],
             [
                 [
-                    'filters' => [
+                    'actions' => [
                         'action_name' => [
                             ['callback' => 'callback_1', 'priority' => 10, 'args' => 1],
                             ['callback' => 'callback_2', 'priority' => 10, 'args' => 1],
@@ -104,14 +104,14 @@ final class FiltersTest extends TestCase
             ],
             [
                 [
-                    'filters' => [
+                    'actions' => [
                         'action_name' => [
                             ['callback' => 'callback_1', 'priority' => 10, 'args' => 1],
                             ['callback' => 'callback_2', 'priority' => 10, 'args' => 1],
                             ['callback' => 'WordpressWrapper\Config\Tests\Fixtures\Callback\CallbackClass::method', 'priority' => 10, 'args' => 1],
                         ],
                     ],
-                    'callback_prefix' => 'App\Filter\\',
+                    'callback_prefix' => 'App\Action\\',
                 ],
                 3,
             ],

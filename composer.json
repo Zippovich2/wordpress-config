@@ -15,7 +15,7 @@
             "email": "zipo.ckorop@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": { "WordpressWrapper\\Config\\": "src/" }
     },

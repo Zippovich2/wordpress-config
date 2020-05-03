@@ -13,22 +13,22 @@ declare(strict_types=1);
 
 namespace WordpressWrapper\Config\Loader;
 
-use WordpressWrapper\Config\Config\FiltersConfig;
+use WordpressWrapper\Config\Config\Config;
 
 /**
  * @author Skoropadskyi Roman <zipo.ckorop@gmail.com>
  */
-final class YamlFiltersLoader extends AbstractYamlLoader
+final class YamlConfigLoader extends AbstractYamlLoader
 {
     public function load($resource, string $type = null)
     {
         $configValues = $this->parse($resource);
 
-        return $this->process(new FiltersConfig(), $configValues);
+        return $this->process(new Config(), $configValues);
     }
 
     public function supports($resource, string $type = null)
     {
-        return \is_string($resource) && \preg_match('/(.+-)?filters\.yaml/', \pathinfo($resource, PATHINFO_BASENAME));
+        return \is_string($resource) && 'config.yaml' === \pathinfo($resource, PATHINFO_BASENAME);
     }
 }

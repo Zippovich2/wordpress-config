@@ -58,7 +58,7 @@ final class ConfigTest extends TestCase
     {
         $this->expectException(PathException::class);
 
-        $config = new Config('some/dir');
+        (new Config('some/dir'));
     }
 
     public function processFileProvider()

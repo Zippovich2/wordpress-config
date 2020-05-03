@@ -35,6 +35,6 @@ final class YamlActionsLoader extends AbstractYamlLoader
      */
     public function supports($resource, string $type = null)
     {
-        return \is_string($resource) && 'actions.yaml' === \pathinfo($resource, PATHINFO_BASENAME);
+        return \is_string($resource) && \preg_match('/(.+-)?actions\.yaml/', \pathinfo($resource, PATHINFO_BASENAME));
     }
 }

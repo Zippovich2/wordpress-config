@@ -20,8 +20,10 @@ use Symfony\Component\Config\Loader\LoaderResolver;
 use WordpressWrapper\Config\Exception\LoaderException;
 use WordpressWrapper\Config\Exception\PathException;
 use WordpressWrapper\Config\Handler\Actions;
+use WordpressWrapper\Config\Handler\Config as ConfigHandler;
 use WordpressWrapper\Config\Handler\Filters;
 use WordpressWrapper\Config\Loader\YamlActionsLoader;
+use WordpressWrapper\Config\Loader\YamlConfigLoader;
 use WordpressWrapper\Config\Loader\YamlFiltersLoader;
 
 /**
@@ -56,6 +58,7 @@ final class Config
         $loaderResolver = new LoaderResolver([
             new YamlFiltersLoader($this->fileLocator),
             new YamlActionsLoader($this->fileLocator),
+            new YamlConfigLoader($this->fileLocator),
         ]);
 
         $this->loader = new DelegatingLoader($loaderResolver);
@@ -68,23 +71,60 @@ final class Config
      */
     public function load(): void
     {
-        Filters::handle($this->processFile(self::FILTERS_CONFIG));
-        Actions::handle($this->processFile(self::ACTIONS_CONFIG));
+        $config = ConfigHandler::handle($this->processFile('config.yaml'));
+
+        $this->loadActions($config['actions'] ?? null);
+        $this->loadFilters($config['filters'] ?? null);
+    }
+
+    /**
+     * Loading actions from included files or from actions.yaml if exists.
+     */
+    private function loadActions(?array $actions = null): void
+    {
+        if (null === $actions) {
+            Actions::handle($this->processFile(self::ACTIONS_CONFIG));
+        } else {
+            foreach ($actions as $configFile) {
+                Actions::handle($this->processFile($configFile, true, false));
+            }
+        }
+    }
+
+    /**
+     * Loading filters from included files or from actions.yaml if exists.
+     */
+    private function loadFilters(?array $filters = null): void
+    {
+        if (null === $filters) {
+            Filters::handle($this->processFile(self::FILTERS_CONFIG));
+        } else {
+            foreach ($filters as $configFile) {
+                Filters::handle($this->processFile($configFile, true, false));
+            }
+        }
     }
 
     /**
      * Loading file by name and looking for file in env directory and merge both files in one.
      *
      * @return array
+     *
+     * @throws PathException   if file included in config.yaml not found.
+     * @throws LoaderException if config file is invalid or if something went wrong
      */
-    public function processFile(string $filename, bool $loadEnvConfig = true)
+    public function processFile(string $filename, bool $loadEnvConfig = true, bool $skipNotFoundFiles = true)
     {
         try {
             $filePath = $this->fileLocator->locate($filename);
             $values = $this->loader->load($filePath);
         } catch (FileLocatorFileNotFoundException $e) {
+            if (false === $skipNotFoundFiles) {
+                throw new PathException(\sprintf('File "%s" not found. Config files included in config.yaml could be exist.', $filename), 0, $e);
+            }
+
             $values = [];
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             throw new LoaderException($filename, $e->getCode(), $e);
         }
 
